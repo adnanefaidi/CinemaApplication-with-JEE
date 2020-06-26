@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>modifier Place</title>
+</head>
+<body>
+	<div layout:fragment="c1">
+	<div class="container">
+			<h1>Modifier Place</h1>
+		<div class="panel panel-default">
+			<div class="panel-heading">Place</div>
+			<div class="panel-body">
+				<form th:action="@{/savePlace}" method="post">
+					<div class="form-group">
+						<label class="control-label">ID:</label>
+						<input class="form-control" type="text" name="id" th:value="${place.id}" readonly>
+						<span th:errors="${place.id}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Longitude:</label>
+						<input class="form-control" type="text" name="longitude" th:value="${place.longitude}">
+						<span th:errors="${place.longitude}" class="text-danger"></span>
+					
+					</div>
+					<div class="form-group">
+						<label class="control-label">Latitude:</label>
+						<input class="form-control" type="text" name="latidude" th:value="${place.latidude}">
+						<span th:errors="${place.latidude}" class="text-danger"></span>
+	
+					</div>
+					<div class="form-group">
+						<label class="control-label">Altitude:</label>
+						<input class="form-control" type="text" name="altitude" th:value="${place.altitude}">
+						<span th:errors="${place.altitude}" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Numero:</label>
+						<input class="form-control" type="text" name="numero" th:value="${place.numero}">
+						<span th:errors="${place.numero}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Salles:</label>
+						<select class="form-control" th:field="*{place.salle.id}">
+						<option th:value="${place.salle.id}" th:text="${place.salle.name}"></option>
+						<option th:each="s:${listSalles}"  th:text="${s.name}" th:value="${s.id}" >
+						</select>
+						<span th:errors="${place.salle.id}" class="text-danger"></span>
+					</div>
+					
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
+			</div>
+		</div>
+		
+		</div>	
+	</div>
+</body>
+</html>

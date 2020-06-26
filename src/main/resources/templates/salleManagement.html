@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+	<head>
+		<meta charset="utf-8">
+		<title>Salle Page</title>
+	</head>
+	<body>
+	<div layout:fragment="c1">
+	
+		<div class="container">
+				<h1>Salle Manage</h1>
+				<div class="panel panel-primary panelT">
+					<div class="panel-heading">Salles</div>
+						<div class="panel-body">
+							<form th:action="@{/salleManagement}" method="get">
+								<label>Keyword :</label>
+								<input type="text" name="motCle" th:value="${motCle}">
+								<button type="submit" class="btn btn-primary">Chercher</button>
+							</form>
+						</div>
+						<div class="panel-body">
+							<table class="table">
+							<tr>
+								<th>#ID</th>
+								<th>Name</th>
+								<th>Nombre des palces</th>
+								<th>Cinema</th>
+								<th>Operations</th>							
+							</tr>
+							<tr th:each="s:${listSalles}">
+								<td th:text="${s.id}"></td>
+								<td th:text="${s.name}"></td>
+								<td th:text="${s.nombrePlace}"></td>
+								<td th:text="${s.cinema.name}"></td>								
+								<td>
+									<a onClick="return confirm('Etes vous sûre?')" th:href="@{/deleteSalle(id=${s.id}, page=${currentPage}, motCle=${motCle} )}" class="btn btn-danger">Delete</a>
+									<a th:href="@{/editSalle(id=${s.id})}" class="btn btn-success">Edit</a>
+								</td>
+							</tr>
+							</table>
+							<ul class="nav nav-pills">
+								<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+								<a th:href="@{/salleManagement(page=${status.index}, motCle=${motCle} )}" th:text="${status.index}"></a>
+								</li>
+							</ul>	
+						</div>
+				</div>
+				<a th:href="@{/formSalle}" class="btn btn-primary">Ajouter Salle</a>
+				
+			</div>
+	</div>
+		
+		
+		
+	</body>
+</html>	

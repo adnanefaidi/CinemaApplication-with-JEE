@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+	<head>
+		<meta charset="utf-8">
+		<title>Ville Page</title>
+	</head>
+	<body>
+	<div layout:fragment="c1">
+	
+		<div class="container">
+				<h1>Ville Manage</h1>
+				<div class="panel panel-primary panelT">
+					<div class="panel-heading">Listes Villes</div>
+						<div class="panel-body">
+							<form th:action="@{/villeManagement}" method="get">
+								<label>Keyword :</label>
+								<input type="text" name="motCle" th:value="${motCle}">
+								<button type="submit" class="btn btn-primary">Chercher</button>
+							</form>
+						</div>
+						<div class="panel-body">
+							<table class="table">
+							<tr>
+								<th>#ID</th>
+								<th>Name</th>
+								<th>Longitude</th>
+								<th>Latitude</th>
+								<th>Altitude</th>
+								<th>Operations</th>							
+							</tr>
+							<tr th:each="v:${listVilles}">
+								<td th:text="${v.id}"></td>
+								<td th:text="${v.name}"></td>
+								<td th:text="${v.longitude}"></td>
+								<td th:text="${v.latitude}"></td>
+								<td th:text="${v.altitude}"></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')">
+									<a onClick="return confirm('Etes vous sûre?')" th:href="@{/deleteVille(id=${v.id}, page=${currentPage}, motCle=${motCle} )}" class="btn btn-danger">Delete</a>
+									<a th:href="@{/editVille(id=${v.id})}" class="btn btn-success">Edit</a>
+								</td>
+							</tr>
+							</table>
+							<ul class="nav nav-pills">
+								<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+								<a th:href="@{/villeManagement(page=${status.index}, motCle=${motCle} )}" th:text="${status.index}"></a>
+								</li>
+							</ul>	
+						</div>
+						
+				</div>
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/formVille}" class="btn btn-primary">Ajouter Ville</a>
+			</div>
+	</div>
+		
+		
+		
+	</body>
+</html>	

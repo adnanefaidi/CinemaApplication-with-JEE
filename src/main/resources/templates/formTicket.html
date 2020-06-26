@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>Add Ticket</title>
+</head>
+<body>
+	<div layout:fragment="c1">
+	<div class="container">
+			<h1>Ajouter Ticket</h1>
+		<div class="panel panel-default">
+			<div class="panel-heading">Nouvelle Ticket</div>
+			<div class="panel-body">
+				<form th:action="@{/saveTicket}" method="post"  enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="control-label">Nom Client:</label>
+						<input class="form-control" type="text" name="nomClient" th:value="${ticket.nomClient}">
+						<span th:errors="${ticket.nomClient}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Code Payement:</label>
+						<input class="form-control" type="text" name="codePayement" th:value="${ticket.codePayement}">
+						<span th:errors="${ticket.codePayement}" class="text-danger"></span>
+					
+					</div>
+					<div class="form-group">
+						<label class="control-label">Prix:</label>
+						<input class="form-control" type="text" name="prix" th:value="${ticket.prix}">
+						<span th:errors="${ticket.prix}" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Reserver:</label>
+						
+						<div class="form-check form-check-inline">
+				        <input class="form-check-input" type="radio" name="reserve" th:value="${ticket.reserve}" id="option1" value="0">
+				        <label class="form-check-label" for="option1">Oui</label>
+				   		</div>
+				    	<div class="form-check form-check-inline">
+				        <input class="form-check-input" type="radio" name="reserve" th:value="${ticket.reserve}" id="option2" value="1">
+				        <label class="form-check-label" for="option2">Non</label>
+				    	</div>
+						<span th:errors="${ticket.reserve}" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Places:</label>
+						<select class="form-control" th:field="*{ticket.place}">
+							<option th:value="0" th:text="..."></option>
+							<option th:each="v:${listPlaces}"  th:text="${v.numero}" th:value="${v.id}" >
+						</select>
+						<span th:errors="${ticket.place.id}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Projection:</label>
+						<select class="form-control" th:field="*{ticket.projection}">
+							<option th:value="0" th:text="..."></option>
+							<option th:each="p:${listProjections}"  th:text="${p.dateProjection}" th:value="${p.id}" >
+						</select>
+						<span th:errors="${ticket.projection.id}" class="text-danger"></span>
+					</div>
+					
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
+			</div>
+		</div>
+		
+		</div>	
+	</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+	<head>
+		<meta charset="utf-8">
+		<title>Film Page</title>
+	</head>
+	<body>
+	<div layout:fragment="c1">
+	
+		<div class="container">
+				<h1>Film Manage</h1>
+				<div class="panel panel-primary panelT">
+					<div class="panel-heading">Listes Films</div>
+						<div class="panel-body">
+							<form th:action="@{/filmManagement}" method="get">
+								<label>Keyword :</label>
+								<input type="text" name="motCle" th:value="${motCle}">
+								<button type="submit" class="btn btn-primary">Chercher</button>
+							</form>
+						</div>
+						<div class="panel-body">
+							<table class="table">
+								<tr>
+									<th>#ID</th>
+									<th>Titre</th>
+									<th>Description</th>
+									<th>Realisateur</th>
+									<th>Date de sortie</th>
+									<th>Durée</th>
+									<th>Photo</th>
+									<th>Categorie</th>
+									<th>Operations</th>
+
+								</tr>
+								<tr th:each="f:${listFilms}">
+									<td th:text="${f.id}"></td>
+									<td th:text="${f.titre}"></td>
+									<td th:text="${f.decription}"></td>
+									<td th:text="${f.realisateur}"></td>
+									<td th:text="${f.dateSortie}"></td>
+									<td th:text="${f.duree}"></td>
+									<td><img th:src="${path+f.photo}" style="width:80px;height:80px;"></td>
+									<td th:text="${f.categorie.name}"></td>
+								<td>
+									<a onClick="return confirm('Etes vous sûre?')" th:href="@{/deleteFilm(id=${f.id}, page=${currentPage}, motCle=${motCle} )}" class="btn btn-danger">Delete</a>
+									<a th:href="@{/editFilm(id=${f.id})}" class="btn btn-success">Edit</a>
+								</td>
+							</tr>
+							</table>
+							<ul class="nav nav-pills">
+								<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+								<a th:href="@{/filmManagement(page=${status.index}, motCle=${motCle} )}" th:text="${status.index}"></a>
+								</li>
+							</ul>	
+
+						</div>
+				</div>
+				<a th:href="@{/formFilm}" class="btn btn-primary">Ajouter Film</a>
+			</div>
+	</div>
+		
+		
+		
+	</body>
+</html>	
+
+

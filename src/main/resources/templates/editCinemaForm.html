@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>modifier Cinema</title>
+</head>
+<body>
+	<div layout:fragment="c1">
+	<div class="container">
+			<h1>Modifier Cinema</h1>
+		<div class="panel panel-default">
+			<div class="panel-heading">Cinema</div>
+			<div class="panel-body">
+				<form th:action="@{/saveCinema}" method="post">
+					<div class="form-group">
+						<label class="control-label">ID:</label>
+						<input class="form-control" type="text" name="id" th:value="${cinema.id}" readonly>
+						<span th:errors="${cinema.id}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Name:</label>
+						<input class="form-control" type="text" name="name" th:value="${cinema.name}">
+						<span th:errors="${cinema.name}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Longitude:</label>
+						<input class="form-control" type="text" name="longitude" th:value="${cinema.longitude}">
+						<span th:errors="${cinema.longitude}" class="text-danger"></span>
+					
+					</div>
+					<div class="form-group">
+						<label class="control-label">Latitude:</label>
+						<input class="form-control" type="text" name="latitude" th:value="${cinema.latitude}">
+						<span th:errors="${cinema.latitude}" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Altitude:</label>
+						<input class="form-control" type="text" name="altitude" th:value="${cinema.altitude}">
+						<span th:errors="${cinema.altitude}" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Nombre Salles:</label>
+						<input class="form-control" type="text" name="nombreSalles" th:value="${cinema.nombreSalles}">
+						<span th:errors="${cinema.nombreSalles}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Villes:</label>
+						<select class="form-control" th:field="*{cinema.ville.id}">
+						<option th:value="${cinema.ville.id}" th:text="${cinema.ville.name}"></option>
+						<option th:each="v:${listVilles}"  th:text="${v.name}" th:value="${v.id}" >
+						</select>
+						<span th:errors="${cinema.ville.id}" class="text-danger"></span>
+					</div>
+					
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
+			</div>
+		</div>
+		
+		</div>	
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>Modifier Salle</title>
+</head>
+<body>
+	<div layout:fragment="c1">
+	<div class="container">
+			<h1>Modifier Salle</h1>
+		<div class="panel panel-default">
+			<div class="panel-heading">Salle</div>
+			<div class="panel-body">
+				<form th:action="@{/saveSalle}" method="post">
+					<div class="form-group">
+						<label class="control-label">ID:</label>
+						<input class="form-control" type="text" name="id" th:value="${salle.id}" readonly>
+						<span th:errors="${salle.id}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Name:</label>
+						<input class="form-control" type="text" name="name" th:value="${salle.name}">
+						<span th:errors="${salle.name}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Nombre Places:</label>
+						<input class="form-control" type="text" name="nombrePlace" th:value="${salle.nombrePlace}">
+						<span th:errors="${salle.nombrePlace}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Cinemas:</label>
+						<select class="form-control" th:field="*{salle.cinema.id}">
+						<option th:value="${salle.cinema.id}" th:text="${salle.cinema.name}"></option>
+						<option th:each="v:${listCinemas}"  th:text="${v.name}" th:value="${v.id}" >
+						</select>
+						<span th:errors="${salle.cinema.id}" class="text-danger"></span>
+					</div>
+					
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
+			</div>
+		</div>
+		
+		</div>	
+	</div>
+</body>
+</html>

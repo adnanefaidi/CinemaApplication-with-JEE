@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	>
+	<head>
+		<meta charset="utf-8">
+		<title>LayoutPage</title>
+			<link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"> 
+			<link rel="stylesheet" href="/webjars/font-awesome/5.0.2/web-fonts-with-css/css/fontawesome.min.css"> 
+			<link rel="stylesheet" href="../static/css/Admin.css" th:href="@{css/Admin.css}">
+			<script type="text/javascript" src="/webjars/jquery/1.12.1/jquery.min.js"></script>
+			<script type="text/javascript" src="/webjars/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand brandt" href="#">CinemaApp</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li><a th:href="@{/dashboard}">Home</a></li>
+		      <li><a th:href="@{/villeManagement}">Ville</a></li>
+		      <li><a th:href="@{/placeManagement}">Place</a></li>
+		      <li><a th:href="@{/salleManagement}">Salle</a></li>
+   		      <li><a th:href="@{/projectionManagement}">Projection</a></li>	
+   		      <li><a th:href="@{/ticketManagement}">Ticket</a></li>
+   		      <li><a th:href="@{/cinemaManagement}">Cinema</a></li>
+   		      <li><a th:href="@{/categorieManagement}">Categorie</a></li>
+   		      <li><a th:href="@{/filmManagement}">Film</a></li>
+   		      <li><a th:href="@{/seanceManagement}">Seance</a></li>
+   		       
+		    </ul >
+		    <ul class="nav navbar-nav navbar-right">
+		    <li class="dropdown">
+		          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span sec:authentication="name"></span>
+			        <span class="caret"></span></a>
+			        <ul class="dropdown-menu">
+			          <li class="dropdown-item"><a href="#">Edit Account</a></li>
+			          <li sec:authorize="!isAuthenticated()" class="dropdown-item"><a href="#">Settings</a></li>
+			          <li sec:authorize="isAuthenticated()"class="dropdown-item"><a th:href="@{logout}">Logout</a></li>
+		       		</ul>
+      			</li>
+		    </ul>
+		  </div>
+		</nav>
+		<section layout:fragment="c1">
+		</section>
+	</body>
+</html>	

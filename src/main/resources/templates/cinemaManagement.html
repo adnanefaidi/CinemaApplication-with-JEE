@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+	<head>
+		<meta charset="utf-8">
+		<title>Cinema Page</title>
+	</head>
+	<body>
+	<div layout:fragment="c1">
+	
+		<div class="container">
+				<h1>Cinema Manage</h1>
+				<div class="panel panel-primary panelT">
+					<div class="panel-heading">Cinemas Villes</div>
+						<div class="panel-body">
+							<form th:action="@{/cinemaManagement}" method="get">
+								<label>Keyword :</label>
+								<input type="text" name="motCle" th:value="${motCle}">
+								<button type="submit" class="btn btn-primary">Chercher</button>
+							</form>
+						</div>
+						<div class="panel-body">
+							<table class="table">
+							<tr>
+								<th>#ID</th>
+								<th>Name</th>
+								<th>Longitude</th>
+								<th>Latitude</th>
+								<th>Altitude</th>
+								<th>Nombre des salles</th>
+								<th>Ville</th>
+								<th>Operations</th>							
+							</tr>
+							<tr th:each="c:${listCinemas}">
+								<td th:text="${c.id}"></td>
+								<td th:text="${c.name}"></td>
+								<td th:text="${c.longitude}"></td>
+								<td th:text="${c.latitude}"></td>
+								<td th:text="${c.altitude}"></td>
+								<td th:text="${c.nombreSalles}"></td>
+								<td th:text="${c.ville.name}"></td>								
+								<td>
+									<a onClick="return confirm('Etes vous sûre?')" th:href="@{/deleteCinema(id=${c.id}, page=${currentPage}, motCle=${motCle} )}" class="btn btn-danger">Delete</a>
+									<a th:href="@{/editCinema(id=${c.id})}" class="btn btn-success">Edit</a>
+								</td>
+							</tr>
+							</table>
+							<ul class="nav nav-pills">
+								<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+								<a th:href="@{/cinemaManagement(page=${status.index}, motCle=${motCle} )}" th:text="${status.index}"></a>
+								</li>
+							</ul>	
+						</div>
+				</div>
+				<a th:href="@{/formCinema}" class="btn btn-primary">Ajouter Cinema</a>
+				
+			</div>
+	</div>
+		
+		
+		
+	</body>
+</html>	

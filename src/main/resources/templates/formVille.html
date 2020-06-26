@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>Add Ville</title>
+</head>
+<body>
+	<div layout:fragment="c1">
+	<div class="container">
+			<h1>Ajouter Ville</h1>
+		<div class="panel panel-default">
+			<div class="panel-heading">Nouvelle Ville</div>
+			<div class="panel-body">
+				<form th:action="@{/saveVille}" method="post">
+					<div class="form-group">
+						<label class="control-label">Name:</label>
+						<input class="form-control" type="text" name="name" th:value="${ville.name}">
+						<span th:errors="${ville.name}" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Longitude:</label>
+						<input class="form-control" type="text" name="longitude" th:value="${ville.longitude}">
+						<span th:errors="${ville.longitude}" class="text-danger"></span>
+					
+					</div>
+					<div class="form-group">
+						<label class="control-label">Latitude:</label>
+						<input class="form-control" type="text" name="latitude" th:value="${ville.latitude}">
+						<span th:errors="${ville.latitude}" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Altitude:</label>
+						<input class="form-control" type="text" name="altitude" th:value="${ville.altitude}">
+						<span th:errors="${ville.altitude}" class="text-danger"></span>
+
+					</div>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
+			</div>
+		</div>
+		
+		</div>	
+	</div>
+</body>
+</html>
